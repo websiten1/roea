@@ -3204,6 +3204,114 @@ body.v2 .site-footer {
   border-top: 0;
 }
 
+/* ---- Header layout & wordmark alignment ---- */
+body.v2 .site-header .container.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+body.v2 .site-header .brand {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 460px;
+}
+body.v2 .site-header .brand__name {
+  white-space: normal;
+  line-height: 1.2;
+  display: inline-block;
+}
+body.v2 .header-aux {
+  flex: 0 0 auto;
+  margin-left: auto;
+  margin-right: 18px;
+  gap: 28px;
+}
+body.v2 .header-aux a.header-aux__link {
+  white-space: nowrap;
+  font-size: .72rem;
+  letter-spacing: .2em;
+}
+
+/* Hide the brand subtitle in the header (kept in HTML for SEO/footer use) */
+body.v2 .site-header .brand .brand__sub { display: none; }
+
+/* ---- Page hero & section alignment: keep all content on the same left edge ---- */
+body.v2 .page-hero > .container,
+body.v2 .section > .container {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+/* Prose: read column inside the standard container, NOT centered horizontally */
+body.v2 .prose {
+  max-width: 760px;
+  margin-left: 0;
+  margin-right: auto;
+  text-align: left;
+}
+body.v2 .prose .eyebrow {
+  display: inline-block;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  text-align: left;
+}
+body.v2 .prose h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  color: var(--ink);
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -.005em;
+  margin: 1.4em 0 .4em;
+  text-align: left;
+}
+body.v2 .prose h2:first-child,
+body.v2 .prose .eyebrow + h2 { margin-top: 0; }
+body.v2 .prose h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  color: var(--accent);
+  font-size: 1.4rem;
+  margin: 1.2em 0 .4em;
+  text-align: left;
+}
+body.v2 .prose p {
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  line-height: 1.7;
+  margin: 0 0 1.1em;
+  text-align: left;
+}
+body.v2 .prose ul {
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  padding-left: 22px;
+}
+body.v2 .prose ul li { margin-bottom: 8px; }
+body.v2 .prose blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--paper-tint);
+  margin: 1.5em 0;
+  padding: 16px 24px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.12rem;
+}
+body.v2 .prose .btn { margin-top: 6px; }
+
+/* Page hero: hide any decorative <hr> (some pages still ship one inline) */
+body.v2 .page-hero hr { display: none !important; }
+body.v2 .page-hero .lead { text-align: left; }
+
 /* ---- "See all" CTA helper (used on mobile to collapse long news lists) ---- */
 .section__more {
   text-align: center;

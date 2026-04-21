@@ -33,6 +33,18 @@
     } catch (e) { /* ignore */ }
 
     /* ----------------------------------------------------------
+       Fix brand wordmark whitespace: `<br>` is visually hidden via
+       CSS on a single line, which would smash adjacent words. Replace
+       any <br> inside the brand name with a space so the wordmark
+       reads correctly on a single line on desktop.
+       ---------------------------------------------------------- */
+    document.querySelectorAll('.site-header .brand__name br').forEach(function (br) {
+      var space = document.createTextNode(' ');
+      br.parentNode.insertBefore(space, br);
+      br.parentNode.removeChild(br);
+    });
+
+    /* ----------------------------------------------------------
        Rebuild the primary menu from an authoritative source so
        every page gets the same, correct, complete drawer nav.
        ---------------------------------------------------------- */
@@ -52,7 +64,11 @@
           donate: 'Donează',
           eyebrow: 'Centrul Episcopiei',
           followLabel: 'Urmărește-ne',
-          mainNav: 'Meniu principal'
+          mainNav: 'Meniu principal',
+          // Short labels for the inline header strip
+          headerAbout: 'Despre',
+          headerHier: 'Ierarhi',
+          headerNews: 'Știri'
         }
       : {
           home: 'Home',
@@ -68,7 +84,11 @@
           donate: 'Donate',
           eyebrow: 'Episcopate Center',
           followLabel: 'Follow',
-          mainNav: 'Main menu'
+          mainNav: 'Main menu',
+          // Short labels for the inline header strip
+          headerAbout: 'About',
+          headerHier: 'Hierarchs',
+          headerNews: 'News'
         };
 
     var navItems = [
@@ -158,9 +178,9 @@
       var aux = document.createElement('div');
       aux.className = 'header-aux';
       aux.innerHTML =
-        '<a class="header-aux__link" href="about.html">' + labels.about + '</a>' +
-        '<a class="header-aux__link" href="hierarchs.html">' + labels.hierarchs + '</a>' +
-        '<a class="header-aux__link" href="news.html">' + labels.news + '</a>' +
+        '<a class="header-aux__link" href="about.html">' + labels.headerAbout + '</a>' +
+        '<a class="header-aux__link" href="hierarchs.html">' + labels.headerHier + '</a>' +
+        '<a class="header-aux__link" href="news.html">' + labels.headerNews + '</a>' +
         '<a class="header-aux__cta"  href="donate.html">' + labels.donate + '</a>';
       var t = nav.querySelector('.nav-toggle');
       if (t) nav.insertBefore(aux, t);
