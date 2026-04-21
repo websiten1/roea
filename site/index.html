@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Top bar -->
   <div class="topbar">
     <div class="container topbar__inner">
       <div class="topbar__contact">
@@ -26,7 +25,6 @@
     </div>
   </div>
 
-  <!-- Header -->
   <header class="site-header">
     <div class="container nav">
       <a href="index.html" class="brand">
@@ -45,8 +43,8 @@
             <ul class="submenu">
               <li><a href="about.html">History</a></li>
               <li><a href="about.html#status">Canonical Status</a></li>
-              <li><a href="about.html#vatra">The Vatra</a></li>
-              <li><a href="about.html#camps">Summer Camps</a></li>
+              <li><a href="vatra.html">The Vatra</a></li>
+              <li><a href="youth.html">Youth &amp; Camps</a></li>
             </ul>
           </li>
           <li class="has-sub">
@@ -57,28 +55,39 @@
               <li><a href="hierarchs.html#former">Former Hierarchs</a></li>
             </ul>
           </li>
+          <li><a href="vatra.html">Vatra</a></li>
+          <li><a href="youth.html">Youth</a></li>
           <li class="has-sub">
-            <a href="structure.html">Structure</a>
+            <a href="news.html">News</a>
             <ul class="submenu">
-              <li><a href="structure.html#chancery">Chancery Office</a></li>
-              <li><a href="structure.html#council">Episcopate Council</a></li>
-              <li><a href="structure.html#deaneries">Deaneries</a></li>
-              <li><a href="structure.html#monastic">Monastic Communities</a></li>
-              <li><a href="structure.html#aux">Auxiliary Organizations</a></li>
+              <li><a href="news.html">All News</a></li>
+              <li><a href="pastoral-letter-2026.html">Pastoral Letter 2026</a></li>
+              <li><a href="news.html">Photo Galleries</a></li>
             </ul>
           </li>
-          <li><a href="news.html">News</a></li>
+          <li><a href="structure.html">Structure</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
 
-      <a href="#donate" class="btn btn-gold">Donate</a>
+      <a href="donate.html" class="btn btn-gold">Donate</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero — clean, no busy image background -->
   <section class="hero">
+    <div class="hero__mark" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="#c9a14a" stroke-width="1.5">
+          <circle cx="100" cy="100" r="92" />
+          <circle cx="100" cy="100" r="72" />
+          <path d="M100 30 L100 170 M30 100 L170 100" />
+          <path d="M100 50 L100 150 M50 100 L150 100" stroke-width="3" />
+          <path d="M85 70 L115 70 M85 130 L115 130 M70 85 L70 115 M130 85 L130 115" />
+        </g>
+      </svg>
+    </div>
     <div class="container hero__inner">
       <span class="eyebrow light">Paschal Pastoral Letter · 2026</span>
       <div class="hero__year">2026</div>
@@ -88,7 +97,7 @@
         family and faithful to renewed witness of the Resurrection across America and Canada.
       </p>
       <div class="hero__actions">
-        <a href="news.html" class="btn btn-gold">Read the Letter</a>
+        <a href="pastoral-letter-2026.html" class="btn btn-gold">Read the Letter</a>
         <a href="about.html" class="btn btn-outline">About the Episcopate</a>
       </div>
     </div>
@@ -107,14 +116,14 @@
       <div class="news-grid">
         <article class="news-card">
           <div class="news-card__media">
-            <img src="assets/hero.jpg" alt="" />
+            <img src="assets/pastoral.jpg" alt="" />
             <span class="news-card__date">04 / 05 / 2026</span>
           </div>
           <div class="news-card__body">
             <span class="news-card__cat">Pastoral Letter</span>
             <h3>Paschal Pastoral Letter 2026 issued by Archbishop Nathaniel</h3>
-            <p>The 2026 Paschal Pastoral Letter is now available in both English and Romanian editions, distributed to all parishes of the Episcopate.</p>
-            <a href="news.html" class="news-card__more">Read more</a>
+            <p>The 2026 Paschal Pastoral Letter — “A Light to the Nations” — is now available, distributed to all parishes of the Episcopate.</p>
+            <a href="pastoral-letter-2026.html" class="news-card__more">Read the letter</a>
           </div>
         </article>
 
@@ -133,7 +142,7 @@
 
         <article class="news-card">
           <div class="news-card__media">
-            <img src="assets/pastoral.jpg" alt="" />
+            <img src="assets/cathedral.jpg" alt="" />
             <span class="news-card__date">2025</span>
           </div>
           <div class="news-card__body">
@@ -153,7 +162,20 @@
             <span class="news-card__cat">Vatra Generations</span>
             <h3>Renovations to the Bishop's Main Residence continue</h3>
             <p>Phase work includes new exterior siding, modern wiring, added insulation and reconstruction of the historic porches.</p>
-            <a href="news.html" class="news-card__more">Project gallery</a>
+            <a href="vatra.html#generations" class="news-card__more">Project gallery</a>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-card__media">
+            <img src="assets/vatra.jpg" alt="" />
+            <span class="news-card__date">Summer 2025</span>
+          </div>
+          <div class="news-card__body">
+            <span class="news-card__cat">Youth</span>
+            <h3>Camp Vatra welcomes hundreds of young pilgrims</h3>
+            <p>Children, teens and young adults gathered at the Vatra Românească for prayer, catechesis and the formation of lifelong friendships in Christ.</p>
+            <a href="youth.html" class="news-card__more">About our youth</a>
           </div>
         </article>
 
@@ -169,19 +191,6 @@
             <a href="news.html" class="news-card__more">Details</a>
           </div>
         </article>
-
-        <article class="news-card">
-          <div class="news-card__media">
-            <img src="assets/pastoral.jpg" alt="" />
-            <span class="news-card__date">2025</span>
-          </div>
-          <div class="news-card__body">
-            <span class="news-card__cat">Restoration</span>
-            <h3>Restoration of the Bishop's Residence — Phase 1</h3>
-            <p>After the front-porch restoration, tuck-pointing of the four chimneys and the roofing project moved forward, supported by the Vatra Generations Fund.</p>
-            <a href="news.html" class="news-card__more">View videos</a>
-          </div>
-        </article>
       </div>
     </div>
   </section>
@@ -190,20 +199,19 @@
   <section class="section section--dark">
     <div class="container hierarch">
       <div class="hierarch__img">
-        <img src="assets/pastoral.jpg" alt="His Eminence Archbishop Nathaniel" />
+        <img src="assets/nathaniel.png" alt="His Eminence Archbishop Nathaniel" />
       </div>
       <div>
         <span class="hierarch__title">His Eminence</span>
         <h2>Archbishop Nathaniel</h2>
         <p style="font-family:var(--serif); font-size:1.15rem; color:var(--gold-soft); margin-bottom:24px;">
-          Ruling Hierarch of the Romanian Orthodox Episcopate of America
+          Archbishop of Detroit and the Romanian Orthodox Episcopate of America and Canada
         </p>
         <p>
-          Archbishop Nathaniel leads the Episcopate from the administrative
-          center at the Vatra Românească in Grass Lake, Michigan. Under his archpastoral
-          guidance, the diocese serves Romanian-American Orthodox faithful and missions
-          in the United States and Canada, in canonical communion with the Orthodox
-          Church in America.
+          Archbishop Nathaniel leads the Episcopate from the administrative center at the
+          Vatra Românească in Grass Lake, Michigan. Under his archpastoral guidance, the
+          diocese serves Romanian-American Orthodox faithful and missions in the United States
+          and Canada, in canonical communion with the Orthodox Church in America.
         </p>
         <p>
           His Grace Bishop Andrei (Hoarște) serves as Auxiliary (Vicar) Bishop, ordained
@@ -237,7 +245,7 @@
             <small>Heritage</small>
             <h3>The Vatra Românească</h3>
           </div>
-          <a href="about.html#vatra">Vatra</a>
+          <a href="vatra.html">Vatra</a>
         </div>
         <div class="tile" style="background-image:url('assets/ordination.jpg');">
           <div>
@@ -246,12 +254,12 @@
           </div>
           <a href="structure.html#monastic">Monasteries</a>
         </div>
-        <div class="tile" style="background-image:url('assets/pastoral.jpg');">
+        <div class="tile" style="background-image:url('assets/vatra.jpg');">
           <div>
             <small>Youth</small>
-            <h3>Summer Camps</h3>
+            <h3>Summer Camps &amp; AROY</h3>
           </div>
-          <a href="about.html#camps">Camps</a>
+          <a href="youth.html">Youth</a>
         </div>
       </div>
     </div>
@@ -269,7 +277,7 @@
       <div class="progress" aria-label="7% raised"><span style="width:7%"></span></div>
       <div class="progress-meta">$44,345 raised of $700,000 (online platform · additional $514,000 raised through other channels)</div>
       <p style="margin-top:30px;">
-        <a href="#" class="btn btn-gold">Donate Online</a>
+        <a href="donate.html" class="btn btn-gold">Donate Online</a>
       </p>
     </div>
   </section>
@@ -280,10 +288,10 @@
       <span class="eyebrow">From Our Hierarch</span>
       <hr class="divider" />
       <blockquote>
-        We must always preserve the peace and unity of the Church of Christ —
-        in love, in truth, and in faithful witness across these lands.
+        Come, all faithful, let us worship the holy resurrection of Christ —
+        for He destroyed death by His death.
       </blockquote>
-      <cite>— Pastoral Reflection</cite>
+      <cite>— Paschal Pastoral Letter, 2026</cite>
     </div>
   </section>
 
@@ -309,21 +317,21 @@
           <h4>Episcopate</h4>
           <ul>
             <li><a href="about.html">About ROEA</a></li>
-            <li><a href="about.html">History</a></li>
             <li><a href="hierarchs.html">Hierarchs</a></li>
             <li><a href="structure.html#chancery">Chancery Office</a></li>
             <li><a href="structure.html#council">Episcopate Council</a></li>
+            <li><a href="vatra.html">The Vatra</a></li>
           </ul>
         </div>
 
         <div>
-          <h4>Directories</h4>
+          <h4>Ministries</h4>
           <ul>
-            <li><a href="structure.html#deaneries">Deaneries</a></li>
-            <li><a href="structure.html">Parish Directory</a></li>
-            <li><a href="structure.html">Clergy Directory</a></li>
+            <li><a href="youth.html">Youth &amp; Camps</a></li>
+            <li><a href="youth.html#aroy">AROY</a></li>
             <li><a href="structure.html#monastic">Monastic Communities</a></li>
             <li><a href="structure.html#aux">Auxiliary Organizations</a></li>
+            <li><a href="structure.html">Parish Directory</a></li>
           </ul>
         </div>
 
@@ -331,9 +339,9 @@
           <h4>Resources</h4>
           <ul>
             <li><a href="news.html">News &amp; Events</a></li>
-            <li><a href="news.html">Photo Galleries</a></li>
+            <li><a href="pastoral-letter-2026.html">Paschal Letter 2026</a></li>
             <li><a href="news.html">Solia · The Herald</a></li>
-            <li><a href="news.html">Pastoral Letters</a></li>
+            <li><a href="donate.html">Donate</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>

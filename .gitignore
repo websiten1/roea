@@ -1,1 +1,3 @@
 _mirror_log.txt
+.venv/
+__pycache__/
