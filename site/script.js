@@ -110,9 +110,12 @@
     if (!pathFile || pathFile === '/') pathFile = 'index.html';
     if (pathFile.indexOf('.') === -1) pathFile = pathFile + '.html';
 
-    /* Build ABSOLUTE paths so navigation works from any URL depth,
-       including after Vercel's cleanUrls rewrites. */
-    var navBase = isRo ? '/ro/' : '/';
+    /* Use RELATIVE paths so navigation works whether served from a
+       static file://, a localhost dev server, or Vercel (with cleanUrls
+       transparently redirecting *.html to its bare slug). All RO pages
+       live in /ro/ and link sideways to other RO pages, so a bare
+       filename works from any page in the same directory. */
+    var navBase = '';
 
     var menu = document.getElementById('primaryMenu');
     if (menu) {
@@ -171,22 +174,20 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeMenu();
       });
-      /* Bulletproof link navigation from inside the drawer:
-         On iOS, animating the drawer away (transform) during a tap can
-         cancel the click and leave the user stranded. Trigger navigation
-         explicitly and defer the close animation until the next tick. */
+      /* Let <a> do its native navigation. Closing the drawer is purely
+         cosmetic since the page reload tears it down anyway. We just
+         hide it instantly (no transition) so it doesn't appear to hang
+         while the new page loads. */
       menu.addEventListener('click', function (e) {
         var a = e.target.closest && e.target.closest('a');
-        if (!a) return;
-        var href = a.getAttribute('href');
-        if (!href) return;
-        if (href.charAt(0) === '#') return; // same-page anchor
-        if (a.target === '_blank' || /^(mailto:|tel:)/.test(href)) {
-          closeMenu();
-          return;
+        if (!a || !a.getAttribute('href')) return;
+        if (a.getAttribute('href').charAt(0) === '#') return;
+        if (menu.classList.contains('is-open')) {
+          menu.classList.remove('is-open');
+          document.body.classList.remove('drawer-open');
+          var ov2 = document.getElementById('drawerOverlay');
+          if (ov2) ov2.classList.remove('is-visible');
         }
-        e.preventDefault();
-        setTimeout(function () { window.location.href = a.href; }, 0);
       });
     }
 
