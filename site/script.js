@@ -30,32 +30,30 @@
     var labels = isRo
       ? {
           home: 'Acasă', about: 'Despre Episcopie', hierarchs: 'Ierarhi',
-          vatra: 'Vatra Românească', youth: 'Tineret și tabere',
-          news: 'Știri și evenimente', letter: 'Pastorala 2026',
-          solia: 'Solia', structure: 'Organizare', contact: 'Contact',
-          donate: 'Donează', followLabel: 'Urmărește-ne',
-          eyebrow: 'Centrul Episcopiei'
+          history: 'Istorie', youth: 'Tineret',
+          news: 'Știri', letter: 'Pastorala 2026',
+          structure: 'Organizare', contact: 'Contact',
+          donate: 'Donează'
         }
       : {
           home: 'Home', about: 'About', hierarchs: 'Hierarchs',
-          vatra: 'The Vatra', youth: 'Youth & Camps',
-          news: 'News & Events', letter: 'Pastoral Letter 2026',
-          solia: 'Solia', structure: 'Structure', contact: 'Contact',
-          donate: 'Donate', followLabel: 'Follow',
-          eyebrow: 'Episcopate Center'
+          history: 'History', youth: 'Youth',
+          news: 'News', letter: 'Pastoral Letter 2026',
+          structure: 'Organization', contact: 'Contact',
+          donate: 'Donate'
         };
 
     var navItems = [
       { label: labels.home,      href: 'index.html' },
       { label: labels.about,     href: 'about.html' },
       { label: labels.hierarchs, href: 'hierarchs.html' },
-      { label: labels.vatra,     href: 'vatra.html' },
+      { label: labels.history,   href: 'vatra.html' },
       { label: labels.youth,     href: 'youth.html' },
       { label: labels.news,      href: 'news.html' },
       { label: labels.letter,    href: 'pastoral-letter-2026.html' },
-      { label: labels.solia,     href: 'solia.html' },
       { label: labels.structure, href: 'structure.html' },
-      { label: labels.contact,   href: 'contact.html' }
+      { label: labels.contact,   href: 'contact.html' },
+      { label: labels.donate,    href: 'donate.html', cta: true }
     ];
 
     var pathFile = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
@@ -67,7 +65,10 @@
       menu.innerHTML = '';
       navItems.forEach(function (item) {
         var li = document.createElement('li');
-        if (pathFile === item.href.toLowerCase()) li.className = 'active';
+        var classes = [];
+        if (pathFile === item.href.toLowerCase()) classes.push('active');
+        if (item.cta) classes.push('drawer-cta');
+        if (classes.length) li.className = classes.join(' ');
         var a = document.createElement('a');
         a.href = item.href;
         a.textContent = item.label;
