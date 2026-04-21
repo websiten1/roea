@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Romanian Orthodox Episcopate of America</title>
+  <meta name="description" content="Contact the Chancery of the Romanian Orthodox Episcopate of America at the Vatra Românească in Grass Lake, Michigan." />
+  <link rel="icon" type="image/png" href="assets/logo-roea.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="topbar"><div class="container topbar__inner">
+    <div class="topbar__contact"><span>2535 Grey Tower Road, Jackson MI 49201</span><span>Tel: (517) 522-4800</span></div>
+    <div class="lang-switch"><a href="#" class="active">EN</a><a href="#">RO</a></div>
+  </div></div>
+  <header class="site-header"><div class="container nav">
+    <a href="index.html" class="brand"><img src="assets/logo-roea.png" alt="" />
+      <span class="brand__name">The Romanian Orthodox<br/>Episcopate of America<span class="brand__sub">A Diocese of the OCA</span></span></a>
+    <nav><ul class="menu" id="primaryMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="hierarchs.html">Hierarchs</a></li>
+      <li><a href="structure.html">Structure</a></li>
+      <li><a href="news.html">News</a></li>
+      <li class="active"><a href="contact.html">Contact</a></li>
+    </ul></nav>
+    <a href="index.html#donate" class="btn btn-gold">Donate</a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+  </div></header>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="crumbs"><a href="index.html">Home</a> · Contact</div>
+      <h1>Contact the Chancery</h1>
+      <hr class="divider" style="background:var(--gold-soft);" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="contact-card">
+        <h3>Episcopate Chancery</h3>
+        <p>The Vatra Românească</p>
+        <p><strong>2535 Grey Tower Road<br/>Jackson, MI 49201-9120</strong></p>
+        <span class="label">Telephone</span>
+        <p>(517) 522-4800</p>
+        <span class="label">Fax</span>
+        <p>(517) 522-5907</p>
+        <span class="label">Hours</span>
+        <p>Monday – Friday · 9:00 AM – 4:30 PM (ET)</p>
+      </div>
+
+      <div class="contact-card">
+        <h3>Send a message</h3>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you — your message has been recorded.');">
+          <div class="row"><label for="name">Name</label><input id="name" type="text" required /></div>
+          <div class="row"><label for="email">Email</label><input id="email" type="email" required /></div>
+          <div class="row"><label for="subject">Subject</label><input id="subject" type="text" /></div>
+          <div class="row"><label for="msg">Message</label><textarea id="msg" rows="5" required></textarea></div>
+          <button type="submit" class="btn btn-primary">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><a href="index.html" class="brand"><img src="assets/logo-roea.png" alt="" style="width:48px;" />
+          <span class="brand__name">ROEA<span class="brand__sub">Romanian Orthodox Episcopate of America</span></span></a></div>
+        <div><h4>Episcopate</h4><ul><li><a href="about.html">About</a></li><li><a href="hierarchs.html">Hierarchs</a></li><li><a href="structure.html">Structure</a></li></ul></div>
+        <div><h4>Resources</h4><ul><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div><h4>Donate</h4><ul><li><a href="index.html#donate">Vatra Generations</a></li></ul></div>
+      </div>
+      <div class="copyright">© 2026 The Romanian Orthodox Episcopate of America</div>
+    </div>
+  </footer>
+  <script src="script.js" defer></script>
+</body>
+</html>

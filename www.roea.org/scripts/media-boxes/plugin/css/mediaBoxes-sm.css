@@ -1,0 +1,156 @@
+
+
+	/* == LETS MODIFY SOME COLORS AND STYLE FOR THE DEMO == */
+	
+		.corners .media-box-container  { -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px; }        
+    .round .media-box-container { -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
+    .square .media-box-container { -webkit-border-radius: 0%; -moz-border-radius: 0%; border-radius: 0%; }	
+    
+		.media-box-logo {
+		    padding: 10px 0px 0px 0px;
+		    font-size: 16px;
+		}    
+       
+
+		/* hide no more entries button */
+		.media-boxes-no-more-entries{
+			display: none;
+		}
+
+		/* make your own style of the filter */
+		.filters-container{
+			margin-bottom: 20px;
+		}
+		.custom-filter{
+			padding: 0;
+			text-align: right;
+		}
+		.custom-filter li{
+			list-style: none;
+			display: inline-block;
+			margin-left: 18px;
+			font-size: 12px;
+		}
+		.custom-filter li a{
+			color: #999;
+			text-decoration: none;
+		}
+		.custom-filter li a:hover{
+			color: #333;
+		}
+		.custom-filter li a.selected{
+			color: #000000 !important;
+		}
+
+		/* Set the style of the thumbnail overlay items */
+		.media-box-title{
+			color: #fff;
+			font-size: 11px;
+			margin-bottom: 5px;
+			text-transform: uppercase;
+		    letter-spacing: 2px;
+		    line-height: 28px;
+		}
+		.media-box-title-misc{
+			font-size: 11px;
+			margin-bottom: 5px;
+			text-transform: uppercase;
+		    letter-spacing: 2px;
+		    line-height: 28px;
+		}		
+		.media-box-caption{
+			color: #F2F2F2;
+			font-size: 10px;
+		}
+
+		/* Remove box shadow and border-radius from the media boxes */
+		.media-box-container{
+			  -webkit-border-radius: 0px;
+			  	 -moz-border-radius: 0px;
+			  		  border-radius: 0px;
+
+			  -webkit-box-shadow: none;
+			  	 -moz-box-shadow: none;
+			  	   -o-box-shadow: none;
+			      -ms-box-shadow: none;
+			  		  box-shadow: none;
+		}
+
+		/* thumbnail overlay background */
+		.thumbnail-overlay{
+    		background-color: rgba(0,0,0, .0);
+
+    		-webkit-transition: background-color 0.2s ease-out;
+		       -moz-transition: background-color 0.2s ease-out;
+		         -o-transition: background-color 0.2s ease-out;
+		            transition: background-color 0.2s ease-out;
+		}
+
+		/* thumbnail overlay background (in the first grid change the initial background) */
+		#grid .thumbnail-overlay{
+    		background-color: rgba(0,0,0, 0);
+		}
+
+		/* hover effect on the thumbnail-overlay */
+		.thumbnail-overlay:hover{
+    		background-color: rgba(0,0,0, .50) !important;
+		}
+		
+		/* hover effect on the image */
+		.media-box-image img{
+		    -webkit-transition: transform 0.6s ease-in-out;
+		       -moz-transition: transform 0.6s ease-in-out;
+		         -o-transition: transform 0.6s ease-in-out;
+		        -ms-transition: transform 0.6s ease-in-out;
+		            transition: transform 0.6s ease-in-out;
+
+		    -webkit-transform-origin: center center;
+		       -moz-transform-origin: center center;
+		         -o-transform-origin: center center;
+		        -ms-transform-origin: center center;
+		            transform-origin: center center;
+		}
+		.media-box-image:hover img{
+		    -webkit-transform: scale(1.2) translate(0px);
+		       -moz-transform: scale(1.2) translate(0px);
+		         -o-transform: scale(1.2) translate(0px);
+		        -ms-transform: scale(1.2) translate(0px);
+		            transform: scale(1.2) translate(0px);
+		}
+
+		/* Change alignment in grid 2 */
+		#grid2 .thumbnail-overlay>div.aligment>div.aligment{
+			vertical-align: bottom;
+			padding-bottom: 40px;
+		}
+
+		.thumbnail-overlay .media-box-title{
+			font-size: 16px;
+		}
+
+		.thumbnail-overlay .media-box-caption{
+			font-style: italic;
+			font-size: 12px;
+		}
+		
+		.thumbnail-overlay i.fa, .media-box-play-button, .media-box-sound-button {
+    color: #000000; 
+  }		
+
+.media-box-content{
+	background: none;
+  padding: 20px;
+}
+
+.media-box-footer{
+  background: none;
+  padding: 20px;
+}
+
+.media-boxes-sort-order>span.selected {
+    margin-top: 10px !important;
+}
+
+.media-boxes-filter>li a.selected {
+    background: #000000 !important;
+}
