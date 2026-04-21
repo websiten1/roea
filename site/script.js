@@ -1,5 +1,7 @@
-/* ROEA — minimal site script: hamburger drawer + auxiliary chrome.
-   Native <a href> navigation (we never preventDefault on links). */
+/* ROEA — site script
+   - Builds a single source-of-truth navigation drawer.
+   - Mounts the drawer directly on <body> so nothing can clip it.
+   - Uses native <a href> navigation; links are not intercepted. */
 (function () {
   function ready(fn) {
     if (document.readyState === 'loading') {
@@ -10,37 +12,55 @@
   }
 
   ready(function () {
-    /* ---- Locale detection ---- */
     var path = (location.pathname || '').toLowerCase();
     var isRo = path.indexOf('/ro/') !== -1;
+    var assetPrefix = isRo ? '../assets/' : 'assets/';
+    var localeHomeAlt = isRo ? '../index.html' : 'ro/index.html';
 
-    /* ---- Brand wordmark: replace any <br> with a space so words don't smash ---- */
+    /* Brand wordmark: replace <br> with a space so words don't smash. */
     document.querySelectorAll('.site-header .brand__name br').forEach(function (br) {
       br.parentNode.insertBefore(document.createTextNode(' '), br);
       br.parentNode.removeChild(br);
     });
 
-    /* ---- Convert the inline header Donate button to a compact CTA ---- */
-    document.querySelectorAll('.site-header .btn-gold').forEach(function (a) {
+    /* Neutralise the old inline header Donate button; drawer owns it now. */
+    document.querySelectorAll('.site-header .btn-gold, .site-header .btn-primary').forEach(function (a) {
       a.classList.add('header-cta');
-      a.classList.remove('btn', 'btn-gold');
+      a.classList.remove('btn', 'btn-gold', 'btn-primary');
     });
 
-    /* ---- Rebuild the primary menu from a single source of truth ---- */
     var labels = isRo
       ? {
           home: 'Acasă', about: 'Despre Episcopie', hierarchs: 'Ierarhi',
           history: 'Istorie', youth: 'Tineret',
           news: 'Știri', letter: 'Pastorala 2026',
           structure: 'Organizare', contact: 'Contact',
-          donate: 'Donează'
+          donate: 'Donează',
+          drawerEyebrow: 'Navigare',
+          drawerTitle: 'Episcopia Ortodoxă Rom&acirc;nă a Americii',
+          hierarchsEyebrow: 'Ierarhii noștri',
+          natRole: '&Icirc;naltpreasf.',
+          natName: 'Arhiepiscop Nathaniel',
+          andrRole: 'Preasfinția Sa',
+          andrName: 'Episcop Andrei',
+          footLine: 'Vatra Rom&acirc;nească · Grass Lake, Michigan',
+          localeLabel: 'EN'
         }
       : {
           home: 'Home', about: 'About', hierarchs: 'Hierarchs',
           history: 'History', youth: 'Youth',
           news: 'News', letter: 'Pastoral Letter 2026',
           structure: 'Organization', contact: 'Contact',
-          donate: 'Donate'
+          donate: 'Donate',
+          drawerEyebrow: 'Navigation',
+          drawerTitle: 'Romanian Orthodox Episcopate of America',
+          hierarchsEyebrow: 'Our Hierarchs',
+          natRole: 'His Eminence',
+          natName: 'Archbishop Nathaniel',
+          andrRole: 'His Grace',
+          andrName: 'Bishop Andrei',
+          footLine: 'Vatra Rom&acirc;nească · Grass Lake, Michigan',
+          localeLabel: 'RO'
         };
 
     var navItems = [
@@ -52,97 +72,141 @@
       { label: labels.news,      href: 'news.html' },
       { label: labels.letter,    href: 'pastoral-letter-2026.html' },
       { label: labels.structure, href: 'structure.html' },
-      { label: labels.contact,   href: 'contact.html' },
-      { label: labels.donate,    href: 'donate.html', cta: true }
+      { label: labels.contact,   href: 'contact.html' }
     ];
 
     var pathFile = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     if (!pathFile || pathFile === '/') pathFile = 'index.html';
     if (pathFile.indexOf('.') === -1) pathFile = pathFile + '.html';
 
-    var menu = document.getElementById('primaryMenu');
-    if (menu) {
-      menu.innerHTML = '';
-      navItems.forEach(function (item) {
-        var li = document.createElement('li');
-        var classes = [];
-        if (pathFile === item.href.toLowerCase()) classes.push('active');
-        if (item.cta) classes.push('drawer-cta');
-        if (classes.length) li.className = classes.join(' ');
-        var a = document.createElement('a');
-        a.href = item.href;
-        a.textContent = item.label;
-        li.appendChild(a);
-        menu.appendChild(li);
-      });
+    /* --------------------------------------------------------------
+       Build / relocate the drawer onto <body>. This keeps it above
+       every stacking context and outside any clipping ancestor.
+       -------------------------------------------------------------- */
+    var existingMenu = document.getElementById('primaryMenu');
+    var drawer = document.createElement('aside');
+    drawer.className = 'drawer';
+    drawer.id = 'siteDrawer';
+    drawer.setAttribute('aria-hidden', 'true');
+    drawer.setAttribute('role', 'dialog');
+    drawer.setAttribute('aria-label', isRo ? 'Meniu principal' : 'Primary menu');
+
+    drawer.innerHTML =
+      '<button type="button" class="drawer__close" id="drawerClose" aria-label="Close menu">&times;</button>' +
+      '<div class="drawer__top">' +
+        '<span class="drawer__eyebrow">' + labels.drawerEyebrow + '</span>' +
+        '<h4 class="drawer__title">' + labels.drawerTitle + '</h4>' +
+      '</div>' +
+      '<nav class="drawer__nav" aria-label="Primary"><ul class="menu" id="primaryMenu"></ul></nav>' +
+      '<a class="drawer__cta" href="donate.html">' +
+        '<span>' + labels.donate + '</span>' +
+        '<span class="drawer__cta-arrow" aria-hidden="true"></span>' +
+      '</a>' +
+      '<div class="drawer__hierarchs">' +
+        '<span class="drawer__eyebrow drawer__eyebrow--light">' + labels.hierarchsEyebrow + '</span>' +
+        '<div class="hier-pair">' +
+          '<a class="hier-chip" href="hierarchs.html#nathaniel">' +
+            '<span class="hier-chip__ring hier-chip__ring--paper">' +
+              '<span class="hier-chip__circle">' +
+                '<img src="' + assetPrefix + 'nathaniel.png" alt="" />' +
+              '</span>' +
+            '</span>' +
+            '<span class="hier-chip__text">' +
+              '<small>' + labels.natRole + '</small>' +
+              '<strong>' + labels.natName + '</strong>' +
+            '</span>' +
+          '</a>' +
+          '<a class="hier-chip" href="bishop-andrei.html">' +
+            '<span class="hier-chip__ring hier-chip__ring--ink">' +
+              '<span class="hier-chip__circle">' +
+                '<img src="' + assetPrefix + 'andrei.png" alt="" />' +
+              '</span>' +
+            '</span>' +
+            '<span class="hier-chip__text">' +
+              '<small>' + labels.andrRole + '</small>' +
+              '<strong>' + labels.andrName + '</strong>' +
+            '</span>' +
+          '</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="drawer__foot">' +
+        '<span class="drawer__foot-line">' + labels.footLine + '</span>' +
+        '<a class="drawer__locale" href="' + localeHomeAlt + '">' + labels.localeLabel + '</a>' +
+      '</div>';
+
+    /* Remove any pre-existing header nav BEFORE mounting the new one,
+       so we never have two #primaryMenu nodes in the DOM at once. */
+    if (existingMenu) {
+      var hostNav = existingMenu.closest('nav');
+      if (hostNav) hostNav.parentNode.removeChild(hostNav);
+      else existingMenu.parentNode.removeChild(existingMenu);
     }
 
-    /* ---- Drawer open / close ---- */
+    document.body.appendChild(drawer);
+
+    /* Populate the link list (inside the freshly mounted drawer). */
+    var menu = drawer.querySelector('#primaryMenu');
+    navItems.forEach(function (item) {
+      var li = document.createElement('li');
+      if (pathFile === item.href.toLowerCase()) li.className = 'active';
+      var a = document.createElement('a');
+      a.href = item.href;
+      a.textContent = item.label;
+      li.appendChild(a);
+      menu.appendChild(li);
+    });
+
+    /* Overlay. */
+    var overlay = document.createElement('div');
+    overlay.className = 'drawer-overlay';
+    overlay.id = 'drawerOverlay';
+    document.body.appendChild(overlay);
+
+    function openDrawer() {
+      drawer.classList.add('is-open');
+      drawer.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('is-visible');
+      document.body.classList.add('no-scroll', 'drawer-open');
+      if (toggle) toggle.setAttribute('aria-expanded', 'true');
+    }
+    function closeDrawer() {
+      drawer.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('is-visible');
+      document.body.classList.remove('no-scroll', 'drawer-open');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    }
+
     var toggle = document.getElementById('navToggle');
-
-    function openMenu() {
-      if (!menu) return;
-      menu.classList.add('is-open');
-      document.body.classList.add('no-scroll');
-      var ov = ensureOverlay();
-      ov.classList.add('is-visible');
-    }
-    function closeMenu() {
-      if (menu) menu.classList.remove('is-open');
-      document.body.classList.remove('no-scroll');
-      var ov = document.getElementById('drawerOverlay');
-      if (ov) ov.classList.remove('is-visible');
-    }
-    function ensureOverlay() {
-      var ov = document.getElementById('drawerOverlay');
-      if (!ov) {
-        ov = document.createElement('div');
-        ov.id = 'drawerOverlay';
-        ov.className = 'drawer-overlay';
-        document.body.appendChild(ov);
-        ov.addEventListener('click', closeMenu);
-      }
-      return ov;
-    }
-
-    if (toggle && menu) {
+    if (toggle) {
       toggle.setAttribute('type', 'button');
-      ensureOverlay();
-
-      /* Insert close button inside the drawer (mobile only via CSS) */
-      if (!menu.querySelector('.drawer-close')) {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'drawer-close';
-        btn.setAttribute('aria-label', 'Close menu');
-        btn.innerHTML = '&times;';
-        btn.addEventListener('click', closeMenu);
-        menu.insertBefore(btn, menu.firstChild);
-      }
-
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-controls', 'siteDrawer');
       toggle.addEventListener('click', function (e) {
         e.preventDefault();
-        if (menu.classList.contains('is-open')) closeMenu();
-        else openMenu();
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeMenu();
-      });
-
-      /* When a link inside the drawer is tapped, just hide the drawer
-         cosmetically. Native <a href> navigation handles the rest. */
-      menu.addEventListener('click', function (e) {
-        var a = e.target.closest && e.target.closest('a');
-        if (!a || !a.getAttribute('href')) return;
-        if (a.getAttribute('href').charAt(0) === '#') return;
-        if (menu.classList.contains('is-open')) {
-          menu.classList.remove('is-open');
-          document.body.classList.remove('no-scroll');
-          var ov = document.getElementById('drawerOverlay');
-          if (ov) ov.classList.remove('is-visible');
-        }
+        if (drawer.classList.contains('is-open')) closeDrawer();
+        else openDrawer();
       });
     }
+
+    overlay.addEventListener('click', closeDrawer);
+    var closeBtn = drawer.querySelector('#drawerClose');
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
+    });
+
+    /* When a link inside the drawer is clicked, just close it cosmetically;
+       native <a href> navigation does the real work. */
+    drawer.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (!href || href.charAt(0) === '#') return;
+      drawer.classList.remove('is-open');
+      overlay.classList.remove('is-visible');
+      document.body.classList.remove('no-scroll', 'drawer-open');
+    });
   });
 })();
