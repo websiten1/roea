@@ -17,7 +17,8 @@
     else if (/^structure\./.test(file)) pageClass = 'page-structure';
     else if (/^contact\./.test(file)) pageClass = 'page-contact';
     else if (/^pastoral-letter/.test(file)) pageClass = 'page-letter';
-    document.body.classList.add(pageClass, lang, 'v2');
+    document.body.classList.add(pageClass, lang);
+    if (!document.body.classList.contains('v2')) document.body.classList.add('v2');
   })();
 
   // ---- Drawer menu (hamburger) ----
