@@ -76,4 +76,59 @@
       }
     });
   });
+
+  // ---- Inject inline secondary nav into header (between brand and hamburger) ----
+  (function injectHeaderAux() {
+    var nav = document.querySelector('.site-header .nav');
+    if (!nav || nav.querySelector('.header-aux')) return;
+    var isRo = document.body.classList.contains('lang-ro');
+    var prefix = isRo ? '../' : '';
+    var labels = isRo
+      ? { about: 'Despre', hier: 'Ierarhi', news: 'Știri', donate: 'Donează' }
+      : { about: 'About',  hier: 'Hierarchs', news: 'News', donate: 'Donate' };
+    var aux = document.createElement('div');
+    aux.className = 'header-aux';
+    aux.innerHTML =
+      '<a class="header-aux__link" href="' + (isRo ? 'about.html' : 'about.html') + '">' + labels.about + '</a>' +
+      '<a class="header-aux__link" href="' + (isRo ? 'hierarchs.html' : 'hierarchs.html') + '">' + labels.hier + '</a>' +
+      '<a class="header-aux__link" href="' + (isRo ? 'news.html' : 'news.html') + '">' + labels.news + '</a>' +
+      '<a class="header-aux__cta"  href="' + (isRo ? 'donate.html' : 'donate.html') + '">' + labels.donate + '</a>';
+    var toggle = nav.querySelector('.nav-toggle');
+    if (toggle) nav.insertBefore(aux, toggle);
+    else nav.appendChild(aux);
+  })();
+
+  // ---- Add address + socials at the bottom of the drawer ----
+  (function enrichDrawer() {
+    if (!menu || menu.querySelector('.drawer-foot')) return;
+    var isRo = document.body.classList.contains('lang-ro');
+    var labels = isRo
+      ? { eyebrow: 'Centrul Episcopiei', followLabel: 'Urmărește-ne' }
+      : { eyebrow: 'Episcopate Center', followLabel: 'Follow' };
+    var foot = document.createElement('div');
+    foot.className = 'drawer-foot';
+    foot.innerHTML =
+      '<span class="drawer-foot__eyebrow">' + labels.eyebrow + '</span>' +
+      '<p class="drawer-foot__address">2535 Grey Tower Road<br/>Jackson, MI 49201-9120</p>' +
+      '<a class="drawer-foot__phone" href="tel:+15175224800">(517) 522-4800</a>' +
+      '<span class="drawer-foot__eyebrow" style="margin-top:6px;">' + labels.followLabel + '</span>' +
+      '<div class="drawer-foot__socials">' +
+        '<a href="https://www.facebook.com/ROEofA" target="_blank" rel="noopener" aria-label="Facebook">f</a>' +
+        '<a href="https://twitter.com/ROEofA" target="_blank" rel="noopener" aria-label="Twitter">t</a>' +
+        '<a href="https://www.youtube.com/user/RomanianDioceseROEA" target="_blank" rel="noopener" aria-label="YouTube">y</a>' +
+      '</div>';
+    menu.appendChild(foot);
+  })();
+
+  // ---- Sticky header scroll state ----
+  (function stickyHeaderState() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    var onScroll = function () {
+      if (window.scrollY > 8) document.body.classList.add('scrolled');
+      else document.body.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
 })();
