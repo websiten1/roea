@@ -1512,15 +1512,17 @@ body.drawer-open .nav-toggle::after {
   position: relative;
 }
 .hier-portrait__inner img {
-  width: 140%; height: 140%;
   position: absolute;
-  left: -20%; top: -14%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center 16%;
-  filter: none;
+  object-position: 50% 22%;
+  transform: scale(1.18);
+  transform-origin: 50% 22%;
   transition: transform .5s ease;
 }
-.hier-card:hover .hier-portrait__inner img { transform: scale(1.06); }
+.hier-card:hover .hier-portrait__inner img { transform: scale(1.24); }
 
 .hier-card__eyebrow {
   display: inline-block;
@@ -2729,3 +2731,246 @@ body.drawer-open .nav-toggle::after {
   .phone-list > div:nth-child(odd) { border-right: 0; padding-right: 2px; }
   .phone-list > div:nth-child(even) { padding-left: 2px; }
 }
+
+/* Alias: staff-card--hier (shorter) = staff-card--hierarch */
+.staff-card--hier {
+  background: linear-gradient(180deg, #fffaf5 0%, #fff 40%);
+  border-top-width: 4px;
+}
+
+/* -------- Photo Galleries -------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 32px;
+}
+.gallery-card {
+  display: block;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 2px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0,0,0,.08);
+  border-color: var(--burgundy);
+}
+.gallery-card__frame {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.05), rgba(0,0,0,.08)),
+    linear-gradient(180deg, var(--burgundy) 0%, #4a0a14 100%);
+  border-bottom: 3px solid var(--burgundy);
+}
+.gallery-card__frame::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px dashed rgba(255,255,255,.28);
+}
+.gallery-card__frame::after {
+  content: '+';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+  height: 54px;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 50%;
+  color: rgba(255,255,255,.85);
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  line-height: 52px;
+  text-align: center;
+}
+.gallery-card__count {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: #fff;
+  background: rgba(0,0,0,.35);
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,.25);
+}
+.gallery-card h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin: 20px 22px 6px;
+  line-height: 1.35;
+}
+.gallery-card p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  margin: 0 22px 22px;
+  line-height: 1.5;
+}
+@media (max-width: 960px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+@media (max-width: 640px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+}
+
+/* -------- Summer Camps (hub + camp pages) -------- */
+.camps-hero-band {
+  background: linear-gradient(180deg, #fff 0%, #fbf6ee 100%);
+  border-top: 1px solid rgba(0,0,0,.06);
+  border-bottom: 3px solid var(--burgundy);
+}
+.camp-dates {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin: 28px 0 8px;
+}
+.camp-date-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-left: 3px solid var(--burgundy);
+  padding: 26px 28px;
+  border-radius: 2px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.03);
+}
+.camp-date-card .eyebrow { color: var(--burgundy); }
+.camp-date-card h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin: 8px 0 14px;
+  color: var(--ink);
+}
+.camp-date-card .dates {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--burgundy);
+  margin: 0 0 6px;
+  font-weight: 500;
+}
+.camp-date-card .ages {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--ink-soft);
+}
+.camp-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-top: 32px;
+}
+.camp-tile {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 2px;
+  padding: 26px 22px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.camp-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--burgundy);
+  box-shadow: 0 12px 28px rgba(0,0,0,.06);
+}
+.camp-tile--disabled {
+  opacity: .6;
+  pointer-events: none;
+  background: #fafafa;
+}
+.camp-tile__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--burgundy);
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+}
+.camp-tile--disabled .camp-tile__mark { background: #888; }
+.camp-tile h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+.camp-tile p {
+  font-family: var(--serif);
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+.camp-tile .cancelled-tag {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  color: var(--burgundy);
+  border: 1px solid var(--burgundy);
+  padding: 2px 8px;
+  margin-top: 10px;
+}
+@media (max-width: 960px) {
+  .camp-dates { grid-template-columns: 1fr; }
+  .camp-card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .camp-card-grid { grid-template-columns: 1fr; }
+}
+
+.camp-steps {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.camp-steps li {
+  counter-increment: step;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-top: 3px solid var(--burgundy);
+  padding: 22px 22px 22px 22px;
+  position: relative;
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.camp-steps li::before {
+  content: counter(step, decimal-leading-zero);
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: var(--burgundy);
+  margin-bottom: 8px;
+}
+@media (max-width: 960px) { .camp-steps { grid-template-columns: 1fr; } }
