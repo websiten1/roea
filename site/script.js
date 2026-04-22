@@ -210,6 +210,39 @@
     });
 
     /* --------------------------------------------------------------
+       Section break — insert a decorative burgundy divider between
+       every pair of top-level <section> elements so the site never
+       looks too white. Three variants are rotated for rhythm.
+       -------------------------------------------------------------- */
+    var sections = Array.prototype.slice.call(document.querySelectorAll('body > section'));
+    if (sections.length > 1) {
+      var variants = ['', 'section-break--band', '', 'section-break--band'];
+      var variantIndex = 0;
+      for (var i = 1; i < sections.length; i++) {
+        var prev = sections[i - 1];
+        var curr = sections[i];
+        /* Skip inserting when either side already has a strong coloured surface
+           (burgundy/dark bands) — the contrast alone does the separation. */
+        var coloured = function (el) {
+          return el.classList.contains('section--dark')
+            || el.classList.contains('donate-band')
+            || el.classList.contains('aroy-band');
+        };
+        if (coloured(prev) || coloured(curr)) continue;
+        var brk = document.createElement('div');
+        var variantClass = variants[variantIndex % variants.length];
+        variantIndex++;
+        brk.className = 'section-break' + (variantClass ? ' ' + variantClass : '');
+        brk.setAttribute('aria-hidden', 'true');
+        brk.innerHTML =
+          '<span class="section-break__line"></span>' +
+          '<span class="section-break__mark"></span>' +
+          '<span class="section-break__line"></span>';
+        curr.parentNode.insertBefore(brk, curr);
+      }
+    }
+
+    /* --------------------------------------------------------------
        Footer — rebuild every page footer from a single source of
        truth so labels match the simplified drawer menu. No logo.
        Burgundy surface, white type.
